@@ -1,6 +1,23 @@
 <template>
     <div class="notes">
-        <div 
+        <div class="card has-background-dark p-4 mb-5">
+            <div class="field">
+                <div class="control">
+                   <textarea
+                     class="textarea"
+                     placeholder="Add a new note"
+                   />
+                </div>
+            </div>
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <button class="button is-link has-background-success">
+                        Add new Note
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
             v-for="i in 3"
             class="card mb-4"
         >
@@ -16,8 +33,7 @@
             <footer class="card-footer">
                 <a href="#" class="card-footer-item">Edit</a>
                 <a href="#" class="card-footer-item">Delete</a>
-            </footer>
-         
+            </footer>     
         </div>
     </div>
 </template>
