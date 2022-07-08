@@ -15,5 +15,21 @@ export const useStoreNotes = defineStore('storeNotes', {
       }
       ] 
     }
+  },
+  actions: {
+    addNote(content) {
+      const id = (new Date().getTime()).toString()
+      const note = {
+        id,
+        content
+      }
+    this.notes.unshift(note)
+    },
+    deleteNote(idToDelete) {
+      console.log('id: ' ,idToDelete)
+      this.notes = this.notes.filter((note) => {
+      return note.id !== idToDelete 
+    })
   }
+}
 })
