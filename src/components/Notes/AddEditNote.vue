@@ -7,7 +7,7 @@
                         @input="$emit('update:modelValue', modelValue)"
                         class="textarea"
                         placeholder="Add a new note"
-                        ref="newNoteRef"
+                        ref="textAreaRef"
                     />
                 </div>
             </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 
 const props = defineProps({
     modelValue: {
@@ -29,5 +30,17 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+const textAreaRef = ref(null)
+
+const focusTextarea = () => {
+    textAreaRef.value.focus()
+    console.log('focus text area')
+}
+
+// make method available to parent component
+defineExpose({
+    focusTextarea
+})
 
 </script>
