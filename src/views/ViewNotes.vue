@@ -2,6 +2,7 @@
     <div class="notes">
         <AddEditNote
             v-model="newNote"
+            placeHolder="Add a new note"
             ref="addEditNoteRef"
         >
             <template #buttons>
