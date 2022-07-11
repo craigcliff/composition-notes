@@ -22,14 +22,23 @@
                 </button>
             </template>
         </AddEditNote>
+        <pre> {{ $route.params.id }} </pre>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import AddEditNote from '@/components/Notes/AddEditNote.vue'
+import { useStoreNotes } from '@/stores/storeNotes'
+
+const route = useRoute()
+
+const storeNotes = useStoreNotes()
 
 const noteContent = ref('')
+
+noteContent.value = storeNotes.getNoteContent(route.params.id)[0].content
 
 
 </script>
