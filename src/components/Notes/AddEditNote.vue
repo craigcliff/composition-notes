@@ -55,7 +55,6 @@ const textAreaRef = ref(null)
 
 const focusTextarea = () => {
     textAreaRef.value.focus()
-    console.log('focus text area')
 }
 
 // make method available to parent component

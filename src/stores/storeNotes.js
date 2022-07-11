@@ -26,7 +26,6 @@ export const useStoreNotes = defineStore('storeNotes', {
       this.notes.unshift(note)
     },
     deleteNote(idToDelete) {
-      console.log('id: ' ,idToDelete)
       this.notes = this.notes.filter(note => note.id !== idToDelete)
     },
     updateNote(id, content) {
@@ -35,6 +34,14 @@ export const useStoreNotes = defineStore('storeNotes', {
     }
 },
 getters: {
-  getNoteContent: (state) => (id) => state.notes.filter(item  => item.id === id )[0].content 
+  getNoteContent: (state) => (id) => state.notes.filter(item  => item.id === id )[0].content,
+  totalNotesCount: (state) => state.notes.length,
+  totalCharactersCount: (state) => {
+    let count = 0
+    state.notes.forEach(note => {
+      count += note.content.length
+    })
+    return count
+  }
 }
 })
