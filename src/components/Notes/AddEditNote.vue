@@ -17,6 +17,7 @@
                         class="textarea"
                         :placeHolder="placeHolder"
                         ref="textAreaRef"
+                        maxlength="100"
                         v-autofocus
 
                     />
