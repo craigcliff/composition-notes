@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore"
 
 const env = import.meta.env
 
@@ -14,7 +14,9 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app);
+const db = getFirestore(app)
+
+console.log('firebase: ', firebaseConfig)
 
 export {
     db
