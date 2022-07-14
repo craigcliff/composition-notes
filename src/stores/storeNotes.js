@@ -1,9 +1,14 @@
 // stores/counter.js
 import { defineStore } from 'pinia'
-import { collection, deleteDoc, onSnapshot, doc, setDoc, updateDoc } from 'firebase/firestore'
+import { 
+    collection, onSnapshot, 
+    deleteDoc, doc, setDoc, updateDoc, 
+    query, orderBy 
+} from 'firebase/firestore'
 import { db } from '@/js/firebase'
 
 const notesCollectionRef = collection(db, 'notes')
+const notesCollectionQuery = query(notesCollectionRef, orderBy('id', 'desc'))
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
@@ -22,7 +27,7 @@ export const useStoreNotes = defineStore('storeNotes', {
   },
   actions: {
     async getNotes() {
-      onSnapshot(notesCollectionRef, (querySnapshot) => {
+      onSnapshot(notesCollectionQuery, (querySnapshot) => {
         let notes = []
         querySnapshot.forEach((doc) => {
           const note = {
@@ -37,13 +42,15 @@ export const useStoreNotes = defineStore('storeNotes', {
     async addNote(content) {
       const id = (new Date().getTime()).toString()
       await setDoc(doc(notesCollectionRef, id), {
-        content
+        content,
+        id
       })
     },
     async deleteNote(idToDelete) {
       await deleteDoc(doc(notesCollectionRef, idToDelete))
     },
     async updateNote(id, content) {
+      // Only updates fields we specify
       await updateDoc(doc(notesCollectionRef, id), {
         content
       })
