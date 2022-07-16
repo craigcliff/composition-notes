@@ -1,6 +1,7 @@
 
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
 
 const env = import.meta.env
 
@@ -15,9 +16,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
-console.log('firebase: ', firebaseConfig)
+const auth = getAuth(app);
 
 export {
-    db
+    db,
+    auth
 }
