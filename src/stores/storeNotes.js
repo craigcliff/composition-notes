@@ -6,9 +6,11 @@ import {
     query, orderBy 
 } from 'firebase/firestore'
 import { db } from '@/js/firebase'
+import { useStoreAuth } from '@/stores/storeAuth'
 
-const notesCollectionRef = collection(db, 'users', 'ZIHxgo9LVCVaouj9CJffNg53SR53', 'notes')
-const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+
+let notesCollectionRef 
+let notesCollectionQuery 
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
@@ -27,6 +29,13 @@ export const useStoreNotes = defineStore('storeNotes', {
     }
   },
   actions: {
+    init() {
+      const storeAuth = useStoreAuth()
+
+      notesCollectionRef = collection(db, 'users', storeAuth.user.id, 'notes')
+      notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+      this.getNotes()
+    },
     async getNotes() {
       this.notesLoaded = false
       onSnapshot(notesCollectionQuery, (querySnapshot) => {
@@ -43,6 +52,9 @@ export const useStoreNotes = defineStore('storeNotes', {
         this.notes = notes
         this.notesLoaded = true
       })
+    },
+    clearNotes() {
+      this.notes = []
     },
     async addNote(content) {
       const date = (new Date().getTime()).toString()
