@@ -53,6 +53,8 @@ export const useStoreNotes = defineStore('storeNotes', {
         
         this.notes = notes
         this.notesLoaded = true
+      }, error => {
+        console.log(error.message)
       })
     },
     clearNotes() {
@@ -61,6 +63,7 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     async addNote(content) {
       const date = (new Date().getTime()).toString()
+      console.log("🚀 ~ file: storeNotes.js ~ line 66 ~ addNote ~ date", date)
 
       await addDoc(notesCollectionRef, {
         content,
