@@ -45,6 +45,7 @@
         </div>
           <div class="navbar-end">
             <RouterLink
+              v-if="storeAuth.user.id"
                @click="showMobileNav = false"
                class="navbar-item"
                active-class="is-active"
@@ -53,6 +54,7 @@
               Notes
             </RouterLink>
             <RouterLink
+               v-if="storeAuth.user.id"
                @click="showMobileNav = false"
                class="navbar-item"
                active-class="is-active"
